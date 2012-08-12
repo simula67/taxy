@@ -48,22 +48,22 @@ padding-bottom:1.5%;">
 
     <form action="customer_confirm" method="get">
         <label for="tripId">Your trip id is</label>
-        <input type="text" name="tripId" id="tripId" value="{{ locationPost.tripId }}"/><div/>
+        <input type="text" name="tripId" id="tripId" value="{{ theTrip.tripId }}"/><div/>
         <label for="distance">Approximate distance calculated</label>
-        <input type="text" name="distance" id="distance" value="{{locationPost.distance}}"/><div/>
+        <input type="text" name="distance" id="distance" value="{{theTrip.dist}}"/><div/>
         <label for="fare">Recommended cost would be: Rs.</label>
-        <input type="text" name="fare" id="fare" value="{{locationPost.fare}}"/><div/>
+        <input type="text" name="fare" id="fare" value="{{theTrip.fare}}"/><div/>
         <label for="custPh">Recommended cost would be: Rs.</label>
-        <input type="text" name="fare" id="fare" value="{{custPhone}}"/><div/>
+        <input type="text" name="fare" id="fare" value="{{theTrip.custPhone}}"/><div/>
 
         <label id="fetching">Waiting for a cabbie to pick up your request. Please be patient...</label>
-        {% if cabPh %}
+        {% if theTrip.proposedCab %}
         <label for="cabNo">Cab No.</label>
-        <input type="text" name="cabNo" id="cabNo" disabled="disabled" value="{{cabNo}}/><div/>
+        <input type="text" name="cabNo" id="cabNo" disabled="disabled" value="{{theTrip.proposedCab.cabNo}}/><div/>
         <label for="cabPhone">Ph. No.</label>
-        <input type="text" name="cabPhone" id="cabPhone" disabled="disabled" value="{{cabPh}}/><div/>
+        <input type="text" name="cabPhone" id="cabPhone" disabled="disabled" value="{{theTrip.proposedCab.cabPh}}/><div/>
         <div/><label for="price">Price</price>
-        <input type="text" name="price" id="price" disabled="disabled" value="{{locationPost.fare}}/><div>
+        <input type="text" name="price" id="price" disabled="disabled" value="{{theTrip.proposedFare}}/><div>
         <div/><label for="accept">Accept?</label>
         <input type="radio" name="accept" id="accept"/><div/>
         <input type="submit" value="Submit"/>
