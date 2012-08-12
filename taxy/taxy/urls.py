@@ -18,5 +18,5 @@ urlpatterns = patterns('',
     url(r'^$', root),
     url(r'^location_post/',location_post),
     url(r'^confirmation_post/',confirm_post),
-
+    url(r'^trip_post/', trip_post),
 )

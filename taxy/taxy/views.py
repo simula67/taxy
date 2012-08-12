@@ -90,3 +90,11 @@ def confirm_post(request):
     confirmationPostTemplate = get_template("confirmation_post.html")
     html = confirmationPostTemplate.render(Context( {'confirmationPost' : confirmationPost} ))
     return HttpResponse(html)
+
+#Process get request from the index page. Returns trid, distance, approxCost
+def trip_post(request):
+    #TODO:
+    #Request contains fromX, fromY, toX, toY.
+    #Add model to database
+    #render trip_submit.html with trid, distance and approxCost
+
