@@ -1,3 +1,4 @@
+{% block content %}
 <html>
 <head>
     <title>Taxy</title>
@@ -28,11 +29,11 @@
             font-weight: 2;
         }
     </style>
-    <script typeEQUALS"text/javascript">
+    <script type="text/javascript">
     var obj;
 
     function poll() {
-      url EQUALS "poll_cabs?fromXEQUALS'"PLUS<!--from django-->PLUS"';fromYEQUALS'"PLUS<!--from django-->PLUS"';toXEQUALS'"PLUS<!--from django-->PLUS"';toYEQUALS'"PLUS<!--from django-->PLUS"';distaneEQUALS"PLUS<!--from django-->PLUS";costEQUALS"PLUS<!--from django-->
+    url = "poll_cabs?fromX='{% locationPost.fromX %}';fromY='{% locationPost.fromY %}';toX='{% locationPost.toX %}';toY='{% locationPost.toY %}';distance={% locationPost.distance %};cost={% locationPost.fare %}"
 
       if (window.XMLHttpRequest) {
         // obtain new object
@@ -71,7 +72,7 @@
     }
     </script>
 </head>
-<body onLoadEQUALS"poll()>
+<body onLoad="poll()>
 <div class="yui3-g"style="color:#a4bacd; background-color:#052A6E;
 box-shadow: 5px 5px 2px #888888; border-bottom-left-radius:8px;
 border-bottom-right-radius:8px; -moz-border-bottom-right-radius:8px;
@@ -105,3 +106,4 @@ padding-bottom:1.5%;">
 </div>
 </body>
 </html>
+{% endblock %}
