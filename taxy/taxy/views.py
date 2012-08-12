@@ -3,6 +3,40 @@ from django.template.loader import get_template
 from django.template import Context, Template
 from taxy.models import *
 import datetime
+from googlemaps import GoogleMaps,GoogleMapsError
+from math import pi,cos
+
+degree_to_radian = pi/180.0
+radian_to_degree = 180.0/pi
+
+"""
+del_latlng: returns a pair which is the amount of change in latitude and longitude for given amount of thresholdRadius
+This code is just gives a rough estimate assuming that 
+* Earth is spherical
+* Distance measured in miles
+PS: del_lat is towards NORTH
+and
+del_lng is towards WEST
+"""
+def del_latlng(flat,flng,thresholdRadius=3.10686):
+    earth_radius = 3963.1676
+    del_lat = (thresholdRadius/earth_radius)*radians_to_degrees
+    
+    #Radius of circle at a given latitude
+    tR = earth_radius*cos(flat*degree_to_radian)
+    del_lng = (thresholdRadius/tR)*radian_to_degree
+    
+    return ( del_lat,del_lng)
+"""
+Returns the distance between 2 points from the GoogleAPI
+"""
+
+def dist_calc(from_add,to_add):
+    my_map = GoogleMaps("")
+    direct = my_map.directions(from_add,to_add)
+    dist_meter = direct['Directions']['Distance']['meters']
+    return dist_meter
+
 class LocationPost:
     def __init__(self):   
         self.tripId = ""
