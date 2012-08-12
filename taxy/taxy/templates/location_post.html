@@ -1,0 +1,11 @@
+{% csrf_token %}
+{
+"data" :
+[
+{% for locationPost in locationPosts %}
+{
+'TRID' : '{{ locationPost.tripId }}','fromX : '{{ locationPost.fromX }}', 'fromY : '{{ locationPost.fromY }}','toX : '{{ locationPost.toX }}','toY : '{{ locationPost.toY }}', 'dist' : {{ locationPost.dist }}, 'fare' : '{{ locationPost.fare }}', 'tfDist' : '{{ locationPost.tfDist }}'
+}
+{% endfor %}
+]
+}

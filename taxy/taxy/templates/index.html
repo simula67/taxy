@@ -1,0 +1,153 @@
+<head>
+    <title>Taxy</title>
+    <link rel="stylesheet" type="text/css" href="grids-min.css">
+    <!--link rel="stylesheet" type="text/css" href="cssfonts-min.css"-->
+    <style>
+    body {
+        margin: auto; /* center in viewport */
+        width: 100%;
+    }
+    input[type="text"] {
+        border: 1px solid black;
+        font-size:2.2em;
+        border-radius:10px;
+        -moz-border-radius:5px;
+    }
+    input[type="submit"] {
+        border: 0px;
+        width: 150px;
+        border-radius:10px;
+        -moz-border-radius:10px;
+        padding: 1.5%;
+        background-color: #9d6f30;
+        font-size:150%;
+        margin:2%;
+    }
+    label {
+        font-size: 150%;
+        margin-bottom: 10%;
+        text-align:left;
+    }
+    h1 {
+        font-weight: 2;
+    }
+    </style>
+    <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+    <script>
+    YUI().use('autocomplete', function (Y) {
+        var acNodeList = Y.all('.ac');
+
+        acNodeList.each(function (acNode) {
+        acNode.plug(Y.Plugin.AutoComplete, {
+            // Highlight the first result of the list.
+            activateFirstItem: true,
+
+            // The list of the results contains up to 10 results.
+            maxResults: 10,
+
+            // To display the suggestions, the minimum of typed chars is five.
+            minQueryLength: 5,
+
+            // Number of milliseconds to wait after user input before triggering a
+            // `query` event. This is useful to throttle queries to a remote data
+            // source.
+            queryDelay: 500,
+
+            // Handling the list of results is mandatory, because the service can be
+            // unavailable, can return an error, one result, or an array of results.
+            // However `resultListLocator` needs to always return an array.
+            resultListLocator: function (response) {
+                // Makes sure an array is returned even on an error.
+                if (response.error) {
+                    return [];
+                }
+
+                var query = response.query.results.json,
+                    addresses;
+
+                if (query.status !== 'OK') {
+                    return [];
+                }
+
+                // Grab the actual addresses from the YQL query.
+                addresses = query.results;
+
+                // Makes sure an array is always returned.
+                return addresses.length > 0 ? addresses : [addresses];
+            },
+
+            // When an item is selected, the value of the field indicated in the
+            // `resultTextLocator` is displayed in the input field.
+            resultTextLocator: 'formatted_address',
+
+            // {query} placeholder is encoded, but to handle the spaces correctly,
+            // the query is has to be encoded again:
+            //
+            // "my address" -> "my%2520address" // OK => {request}
+            // "my address" -> "my%20address"   // OK => {query}
+            requestTemplate: function (query) {
+                return encodeURI(query);
+            },
+
+            // {request} placeholder, instead of the {query} one, this will insert
+            // the `requestTemplate` value instead of the raw `query` value for
+            // cases where you actually want a double-encoded (or customized) query.
+            source: 'SELECT * FROM json WHERE ' +
+                        'url="http://maps.googleapis.com/maps/api/geocode/json?' +
+                            'sensor=false&' +
+                            'address={request}"',
+
+            // Automatically adjust the width of the dropdown list.
+            width: 'auto'
+        });
+        // Adjust the width of the input container.
+        acNode.ac.after('resultsChange', function () {
+            var newWidth = this.get('boundingBox').get('offsetWidth');
+            acNode.setStyle('width', Math.max(newWidth, 100));
+        });
+        });
+
+
+    });
+    </script>
+</head>
+
+<body style="background-color:#F8E1C2;"> <div class="yui3-g"
+style="color:#a4bacd; letter-spacing:1px; background-color:#052A6E;
+box-shadow: 5px 5px 2px #888888; border-bottom-left-radius:8px;
+border-bottom-right-radius:8px; -moz-border-bottom-right-radius:8px;
+-moz-border-bottom-left-radius:8px; font-family:Helvetica;
+padding-bottom:1.5%;">
+
+         <div class="content" style="padding-top:10px">
+         <center>
+         <font style="font-size:600%; text-decoration:underline;">Taxy</font><br/>
+         </center>
+         </div>
+    </div>
+    <div style="padding:2%;">
+        <div class="yui3-skin-sam" style="">
+        <center>
+            <form action="." method="post">
+                <label for="to"/>I wish to go to</label><div/>
+                <input type="text" class="ac" id="to" name="to"/><div/>
+                <label for="from"/>from</label><div/>
+                <input type="text" class="ac" id="from" name="from"/><div/>
+                <label for="phone"/>I can be reached at (ph.#)</label><div/>
+                <input type="text" name="phone"/><div/>
+                <input type="submit" value="Find a ride"/>
+            </form>
+        </center>
+        </div>
+    </div>
+    <div class="yui3-g" style="{letter-spacing:.5px; background-color:#63829b; font-family:Serif;word-spacing:2px;padding:1.5%;box-shadow: 5px 5px 2px #888888; border-top-left-radius:8px; border-top-right-radius:8px; -moz-border-top-right-radius:8px; -moz-border-top-left-radius:8px; }">
+    <h1>
+    What is Taxy?
+    </h1>
+    Taxy connects you <b>instanously</b> to the closest cabbies that will take you to your destination. Our recommended rates are the among the lowest in town,
+    and you're almost guaranteed to find a great deal in a matter of minutes. <div/>
+    Happy journey! :)
+    </div>
+
+</body>
+</html>

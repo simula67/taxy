@@ -21,7 +21,9 @@ def location_post(request):
     lat = request.GET['x']
     lon = request.GET['y']
     theCab = Cab.objects.get(cabPhone=int(cabPh))
-    
+    theCab.lastX = lat
+    thecab.lastY = lon
+    theCab.lastUpdated = 
     locationPosts = []
     for i in theCab.tripsEligible.all():
         locationPost = LocationPost()
