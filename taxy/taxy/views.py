@@ -141,8 +141,16 @@ def trip_post(request):
 #TODO:
 #Once the customer confirms, send the customer's phone number to the cabbie
 def customer_confirm(request):
-    pass
     #TODO:
     #check for get variable "accept". It's a radio button. If true then send details(from session) to cabbie's number
     #end session
+    trip = Trip.objects.get(tripId=request.GET['tripId'])
+    if(request.GET['accept'])
+        trip.acceptedCab = request.GET['cabNo']
+        trip.custPhone = request.GET['custPh']
+        trip.save()
+        return HttpResponse("Thank you for booking with Taxy. You will get a call from the cab driver soon.")
+    else
+        return HttpResponse("We're sorry you couldn't find a cab :( . <a href="/">Try again?</a>");
+
 

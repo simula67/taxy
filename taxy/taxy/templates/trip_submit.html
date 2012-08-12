@@ -45,11 +45,18 @@ padding-bottom:1.5%;">
 </div>
 <div>
     <center style="font-size: 150%; margin-bottom:15px;">
-    Your trip id is: {{ locationPost.tripId }}<div/>
-    Approximate distance calculated: {{locationPost.distance}}<div/>
-    Recommended cost would be: Rs. {{locationPost.fare}}<div/>
-    <label id="fetching">Waiting for a cabbie to pick up your request. Please be patient...</label>
+
     <form action="customer_confirm" method="get">
+        <label for="tripId">Your trip id is</label>
+        <input type="text" name="tripId" id="tripId" value="{{ locationPost.tripId }}"/><div/>
+        <label for="distance">Approximate distance calculated</label>
+        <input type="text" name="distance" id="distance" value="{{locationPost.distance}}"/><div/>
+        <label for="fare">Recommended cost would be: Rs.</label>
+        <input type="text" name="fare" id="fare" value="{{locationPost.fare}}"/><div/>
+        <label for="custPh">Recommended cost would be: Rs.</label>
+        <input type="text" name="fare" id="fare" value="{{custPhone}}"/><div/>
+
+        <label id="fetching">Waiting for a cabbie to pick up your request. Please be patient...</label>
         {% if cabPh %}
         <label for="cabNo">Cab No.</label>
         <input type="text" name="cabNo" id="cabNo" disabled="disabled" value="{{cabNo}}/><div/>
