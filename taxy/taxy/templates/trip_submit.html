@@ -29,50 +29,8 @@
             font-weight: 2;
         }
     </style>
-    <script type="text/javascript">
-    var obj;
-
-    function poll() {
-    url = "poll_cabs?fromX='{% locationPost.fromX %}';fromY='{% locationPost.fromY %}';toX='{% locationPost.toX %}';toY='{% locationPost.toY %}';distance={% locationPost.distance %};cost={% locationPost.fare %}"
-
-      if (window.XMLHttpRequest) {
-        // obtain new object
-        obj = new XMLHttpRequest();
-        // set the callback function
-        obj.onreadystatechange = processChange;
-        // we will do a GET with the url; "true" for asynch
-        obj.open("GET", url, true);
-        // null for GET with native object
-        obj.send(null);
-      // IE/Windows ActiveX object
-      } else if (window.ActiveXObject) {
-        obj = new ActiveXObject("Microsoft.XMLHTTP");
-        if (obj) {
-          obj.onreadystatechange = processChange;
-          obj.open("GET", url, true);
-          // don't send null for ActiveX
-          obj.send();
-        }
-      } else {
-        alert("Your browser does not support AJAX");
-      }
-    }
-
-    function processChange() {
-        // 4 means the response has been returned and ready to be processed
-        if (obj.readyState == 4) {
-            // 200 means "OK"
-            if (obj.status == 200) {
-                // process whatever has been sent back here:
-            // anything else means a problem
-            } else {
-                alert("There was a problem in the returned data:\n");
-            }
-        }
-    }
-    </script>
 </head>
-<body onLoad="poll()>
+<body>
 <div class="yui3-g"style="color:#a4bacd; background-color:#052A6E;
 box-shadow: 5px 5px 2px #888888; border-bottom-left-radius:8px;
 border-bottom-right-radius:8px; -moz-border-bottom-right-radius:8px;
@@ -87,20 +45,22 @@ padding-bottom:1.5%;">
 </div>
 <div>
     <center style="font-size: 150%; margin-bottom:15px;">
-    Your trip id is: <!--To add template variables here--><div/>
-    Approximate distance calculated: <!--To add template variables here--><div/>
-    Recommended cost would be: Rs. <!--To add template variables here--><div/>
-    <label id="fetching">Fetching list of cabbies. Please be patient...</label>
+    Your trip id is: {{ locationPost.tripId }}<div/>
+    Approximate distance calculated: {{locationPost.distance}}<div/>
+    Recommended cost would be: Rs. {{locationPost.fare}}<div/>
+    <label id="fetching">Waiting for a cabbie to pick up your request. Please be patient...</label>
     <form action="customer_confirm" method="get">
+        {% if cabPh %}
         <label for="cabNo">Cab No.</label>
-        <input type="text" name="cabNo" id="cabNo" disabled="disabled"/><div/>
+        <input type="text" name="cabNo" id="cabNo" disabled="disabled" value="{{cabNo}}/><div/>
         <label for="cabPhone">Ph. No.</label>
-        <input type="text" name="cabPhone" id="cabPhone" disabled="disabled"/><div/>
+        <input type="text" name="cabPhone" id="cabPhone" disabled="disabled" value="{{cabPh}}/><div/>
         <div/><label for="price">Price</price>
-        <input type="text" name="price" id="price" disabled="disabled"/><div>
+        <input type="text" name="price" id="price" disabled="disabled" value="{{locationPost.fare}}/><div>
         <div/><label for="accept">Accept?</label>
         <input type="radio" name="accept" id="accept"/><div/>
         <input type="submit" value="Submit"/>
+        {% endif %}
         </form>
     </center>
 </div>

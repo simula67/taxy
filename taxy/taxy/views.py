@@ -19,7 +19,7 @@ class ConfirmationPost:
         self.custPh = ""
 
 def root(request):
-    frontPageTemplate = get_template("index.html")
+    frontPageTemplate = get_template("frontpage.html")
     html = frontPageTemplate.render(Context( {} ))
     return HttpResponse(html)
 def location_post(request):
@@ -100,7 +100,7 @@ def trip_post(request):
     #Do something with locationPost;
     #get trid
     tripSubmitTemplate = get_template("trip_submit.html")
-    html = tripSubmitTemplate.render(Context( {'locationPost': locationPost, 'custPhone': request.POST['phone']} ))
+    html = tripSubmitTemplate.render(Context( {'cabPh': cabPh, 'cabNo': cabNo, 'locationPost': locationPost, 'custPhone': request.POST['phone']} ))
 
     return HttpResponse(html)
 
