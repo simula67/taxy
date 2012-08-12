@@ -9,7 +9,7 @@ class Trip(models.Model):
     dist = models.IntegerField(max_length=30)
     tfDist = models.IntegerField(max_length=30)
     fare =  models.DecimalField(max_digits=5, decimal_places=2)
-    state =  models.IntegerField(max_length=30)
+    state =  models.IntegerField(max_length=30) # 0 test, 1 open ,2 acccepted neg, 100 done and dusted,
     insertTime = models.DateTimeField(auto_now=True)
     proposedFare =  models.DecimalField(max_digits=10, decimal_places=2)
     proposedCab = models.ForeignKey('Cab',related_name="proposed",null=True, blank=True)

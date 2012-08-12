@@ -17,5 +17,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', root),
     url(r'^location_post/',location_post),
+    url(r'^confirmation_post/',confirm_post),
 
 )
