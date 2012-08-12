@@ -147,10 +147,12 @@ def customer_confirm(request):
     trip = Trip.objects.get(tripId=request.GET['tripId'])
     if(request.GET['accept'])
         trip.acceptedCab = request.GET['cabNo']
-        trip.custPhone = request.GET['custPh']
+        trip.custPhone = int(request.GET['custPh'])
+        trip.state = 100
         trip.save()
         return HttpResponse("Thank you for booking with Taxy. You will get a call from the cab driver soon.")
     else
+        trip.state = 2
+        trip.save()
         return HttpResponse("We're sorry you couldn't find a cab :( . <a href="/">Try again?</a>");
-
 
