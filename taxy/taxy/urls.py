@@ -19,4 +19,5 @@ urlpatterns = patterns('',
     url(r'^location_post/',location_post),
     url(r'^confirmation_post/',confirm_post),
     url(r'^trip_post/', trip_post),
+    url(r'^customer_confirm/', customer_confirm),
 )

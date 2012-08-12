@@ -91,10 +91,18 @@ def confirm_post(request):
     html = confirmationPostTemplate.render(Context( {'confirmationPost' : confirmationPost} ))
     return HttpResponse(html)
 
+#TODO:
 #Process get request from the index page. Returns trid, distance, approxCost
 def trip_post(request):
     #TODO:
     #Request contains fromX, fromY, toX, toY.
     #Add model to database
     #render trip_submit.html with trid, distance and approxCost
+    #start session and set session variables for customer x and y and phone number
 
+#TODO:
+#Once the customer confirms, send the customer's phone number to the cabbie
+def customer_confirm(request):
+    #TODO:
+    #check for get variable "accept". It's a radio button. If true then send details(from session) to cabbie's number
+    #end session
