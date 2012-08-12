@@ -112,8 +112,3 @@ def customer_confirm(request):
     #check for get variable "accept". It's a radio button. If true then send details(from session) to cabbie's number
     #end session
 
-#TODO:
-#This is the polling function view
-def poll_cabs(request):
-    #TODO:
-    #return cabNo, cabPhone, price
