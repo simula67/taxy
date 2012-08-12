@@ -94,12 +94,15 @@ def confirm_post(request):
 #TODO:
 #Process get request from the index page. Returns trid, distance, approxCost
 def trip_post(request):
-    pass
-    #TODO:
     #Request contains fromX, fromY, toX, toY.
     #Add model to database
-    #render trip_submit.html with trid, distance and approxCost
-    #start session and set session variables for customer x and y and phone number
+    locationPost = LocationPost();
+    #Do something with locationPost;
+    #get trid
+    tripSubmitTemplate = get_template("trip_submit.html")
+    html = tripSubmitTemplate.render(Context( {'locationPost': locationPost, 'custPhone': request.POST['phone']} ))
+
+    return HttpResponse(html)
 
 #TODO:
 #Once the customer confirms, send the customer's phone number to the cabbie
@@ -108,3 +111,9 @@ def customer_confirm(request):
     #TODO:
     #check for get variable "accept". It's a radio button. If true then send details(from session) to cabbie's number
     #end session
+
+#TODO:
+#This is the polling function view
+def poll_cabs(request):
+    #TODO:
+    #return cabNo, cabPhone, price

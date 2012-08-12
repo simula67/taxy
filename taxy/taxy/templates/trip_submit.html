@@ -1,0 +1,107 @@
+<html>
+<head>
+    <title>Taxy</title>
+    <link rel="stylesheet" type="text/css" href="grids-min.css">
+    <style>
+        body {
+            background-color:#F8E1C2;
+            margin: auto; /* center in viewport */
+            width: 100%;
+        }
+        input[type="text"] {
+            border: 1px solid black;
+            font-size:2.2em;
+            border-radius:10px;
+            -moz-border-radius:5px;
+        }
+        input[type="submit"] {
+            border: 0px;
+            width: 150px;
+            border-radius:10px;
+            -moz-border-radius:10px;
+            padding: 1.5%;
+            background-color: #9d6f30;
+
+            margin:2%;
+        }
+        h1 {
+            font-weight: 2;
+        }
+    </style>
+    <script typeEQUALS"text/javascript">
+    var obj;
+
+    function poll() {
+      url EQUALS "poll_cabs?fromXEQUALS'"PLUS<!--from django-->PLUS"';fromYEQUALS'"PLUS<!--from django-->PLUS"';toXEQUALS'"PLUS<!--from django-->PLUS"';toYEQUALS'"PLUS<!--from django-->PLUS"';distaneEQUALS"PLUS<!--from django-->PLUS";costEQUALS"PLUS<!--from django-->
+
+      if (window.XMLHttpRequest) {
+        // obtain new object
+        obj = new XMLHttpRequest();
+        // set the callback function
+        obj.onreadystatechange = processChange;
+        // we will do a GET with the url; "true" for asynch
+        obj.open("GET", url, true);
+        // null for GET with native object
+        obj.send(null);
+      // IE/Windows ActiveX object
+      } else if (window.ActiveXObject) {
+        obj = new ActiveXObject("Microsoft.XMLHTTP");
+        if (obj) {
+          obj.onreadystatechange = processChange;
+          obj.open("GET", url, true);
+          // don't send null for ActiveX
+          obj.send();
+        }
+      } else {
+        alert("Your browser does not support AJAX");
+      }
+    }
+
+    function processChange() {
+        // 4 means the response has been returned and ready to be processed
+        if (obj.readyState == 4) {
+            // 200 means "OK"
+            if (obj.status == 200) {
+                // process whatever has been sent back here:
+            // anything else means a problem
+            } else {
+                alert("There was a problem in the returned data:\n");
+            }
+        }
+    }
+    </script>
+</head>
+<body onLoadEQUALS"poll()>
+<div class="yui3-g"style="color:#a4bacd; background-color:#052A6E;
+box-shadow: 5px 5px 2px #888888; border-bottom-left-radius:8px;
+border-bottom-right-radius:8px; -moz-border-bottom-right-radius:8px;
+-moz-border-bottom-left-radius:8px; font-family:Helvetica;
+padding-bottom:1.5%;">
+
+    <div class="content" style="padding-top:10px">
+         <center>
+         <font style="font-size:600%; text-decoration:underline;">Taxy</font><br/>
+         </center>
+    </div>
+</div>
+<div>
+    <center style="font-size: 150%; margin-bottom:15px;">
+    Your trip id is: <!--To add template variables here--><div/>
+    Approximate distance calculated: <!--To add template variables here--><div/>
+    Recommended cost would be: Rs. <!--To add template variables here--><div/>
+    <label id="fetching">Fetching list of cabbies. Please be patient...</label>
+    <form action="customer_confirm" method="get">
+        <label for="cabNo">Cab No.</label>
+        <input type="text" name="cabNo" id="cabNo" disabled="disabled"/><div/>
+        <label for="cabPhone">Ph. No.</label>
+        <input type="text" name="cabPhone" id="cabPhone" disabled="disabled"/><div/>
+        <div/><label for="price">Price</price>
+        <input type="text" name="price" id="price" disabled="disabled"/><div>
+        <div/><label for="accept">Accept?</label>
+        <input type="radio" name="accept" id="accept"/><div/>
+        <input type="submit" value="Submit"/>
+        </form>
+    </center>
+</div>
+</body>
+</html>
