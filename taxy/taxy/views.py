@@ -141,7 +141,7 @@ def trip_post(request):
     from_add = nearest_add(theTrip.fromX,theTrip.fromY)
     to_add = nearest_add(theTrip.toX,theTrip.toY)
     theTrip.dist = dist_calc(from_add,to_add)
-    theTrip.tfdist = 1
+    theTrip.tfDist = 1
     theTrip.fare = (theTrip.dist / 1000) * 10
     theTrip.state = 1
     theTrip.insertTrip = datetime.datetime.now()
