@@ -94,6 +94,7 @@ def confirm_post(request):
 #TODO:
 #Process get request from the index page. Returns trid, distance, approxCost
 def trip_post(request):
+    pass
     #TODO:
     #Request contains fromX, fromY, toX, toY.
     #Add model to database
@@ -103,6 +104,7 @@ def trip_post(request):
 #TODO:
 #Once the customer confirms, send the customer's phone number to the cabbie
 def customer_confirm(request):
+    pass
     #TODO:
     #check for get variable "accept". It's a radio button. If true then send details(from session) to cabbie's number
     #end session
