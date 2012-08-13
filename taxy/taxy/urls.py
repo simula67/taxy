@@ -20,5 +20,4 @@ urlpatterns = patterns('',
     url(r'^confirmation_post/',confirm_post),
     url(r'^trip_post/', trip_post),
     url(r'^customer_confirm/', customer_confirm),
-    url(r'^poll_cabs/', poll_cabs),
 )
