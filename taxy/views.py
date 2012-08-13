@@ -8,8 +8,6 @@ from math import pi,cos
 
 degree_to_radian = pi/180.0
 radian_to_degree = 180.0/pi
-def nearest_add(x,y):
-    return "The Address"
 
 """
 del_latlng: returns a pair which is the amount of change in latitude and longitude for given amount of thresholdRadius
@@ -138,9 +136,7 @@ def trip_post(request):
     theTrip.fromY = request.GET['fromY']
     theTrip.toX = request.GET['toX']
     theTrip.toY = request.GET['toY']
-    from_add = nearest_add(theTrip.fromX,theTrip.fromY)
-    to_add = nearest_add(theTrip.toX,theTrip.toY)
-    theTrip.dist = dist_calc(from_add,to_add)
+    theTrip.dist = dist_calc(request.GET['from'],request.GET['to'])
     theTrip.tfDist = 1
     theTrip.fare = (theTrip.dist / 1000) * 10
     theTrip.state = 1
