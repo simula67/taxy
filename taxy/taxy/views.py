@@ -115,5 +115,6 @@ def customer_confirm(request):
 #TODO:
 #This is the polling function view
 def poll_cabs(request):
+    pass
     #TODO:
     #return cabNo, cabPhone, price
