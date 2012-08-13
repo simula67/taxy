@@ -8,6 +8,8 @@ from math import pi,cos
 
 degree_to_radian = pi/180.0
 radian_to_degree = 180.0/pi
+def nearest_add(x,y):
+    return "The Address"
 
 """
 del_latlng: returns a pair which is the amount of change in latitude and longitude for given amount of thresholdRadius
@@ -139,7 +141,7 @@ def trip_post(request):
     from_add = nearest_add(theTrip.fromX,theTrip.fromY)
     to_add = nearest_add(theTrip.toX,theTrip.toY)
     theTrip.dist = dist_calc(from_add,to_add)
-    theTrip.tfdist = 0
+    theTrip.tfdist = 1
     theTrip.fare = (theTrip.dist / 1000) * 10
     theTrip.state = 1
     theTrip.insertTrip = datetime.datetime.now()
@@ -160,13 +162,13 @@ def customer_confirm(request):
     #check for get variable "accept". It's a radio button. If true then send details(from session) to cabbie's number
     #end session
     trip = Trip.objects.get(tripId=request.GET['tripId'])
-    if(request.GET['accept'])
+    if request.GET['accept'] == "yes":
         trip.acceptedCab = request.GET['cabNo']
         trip.custPhone = int(request.GET['custPh'])
         trip.state = 100
         trip.save()
         return HttpResponse("Thank you for booking with Taxy. You will get a call from the cab driver soon.")
-    else
+    else:
         trip.state = 2
         trip.save()
         return HttpResponse("We're sorry you couldn't find a cab :( . <a href="/">Try again?</a>");

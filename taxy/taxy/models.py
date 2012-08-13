@@ -7,7 +7,7 @@ class Trip(models.Model):
     toX = models.DecimalField(max_digits=20, decimal_places=10)
     toY = models.DecimalField(max_digits=20, decimal_places=10)
     dist = models.IntegerField(max_length=30)
-    tfDist = models.IntegerField(max_length=30)
+    tfDist = models.IntegerField(max_length=30,null=True, blank=True)
     fare =  models.DecimalField(max_digits=5, decimal_places=2)
     state =  models.IntegerField(max_length=30) # 0 test, 1 open ,2 acccepted neg, 100 done and dusted,
     insertTime = models.DateTimeField(auto_now=True)
