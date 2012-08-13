@@ -19,7 +19,7 @@ class ConfirmationPost:
         self.custPh = ""
 
 def root(request):
-    frontPageTemplate = get_template("frontpage.html")
+    frontPageTemplate = get_template("index.html")
     html = frontPageTemplate.render(Context( {} ))
     return HttpResponse(html)
 def location_post(request):

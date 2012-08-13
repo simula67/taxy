@@ -1,4 +1,0 @@
-{% csrf_token %}
-{{ locationPost.cabId }}
-{{ locationPost.lat }}
-{{ locationPost.lon }}
