@@ -49,7 +49,7 @@ padding-bottom:1.5%;">
     <form action="customer_confirm" method="get">
         <label for="tripId">Your trip id is</label>
         <input type="text" name="tripId" id="tripId" value="{{ theTrip.tripId }}"/><div/>
-        <label for="distance">Approximate distance calculated</label>
+        <label for="distance">Approximate distance calculated<em>(in meters)</em></label>
         <input type="text" name="distance" id="distance" value="{{theTrip.dist}}"/><div/>
         <label for="fare">Recommended cost would be: Rs.</label>
         <input type="text" name="fare" id="fare" value="{{theTrip.fare}}"/><div/>
