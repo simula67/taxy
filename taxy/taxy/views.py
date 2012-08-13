@@ -110,6 +110,7 @@ def confirm_post(request):
             reject = 1
             if theTrip.proposedFare < pfare:
                 theTrip.prposedFare = pfare
+                theTrip.fare = pfare #Hack
                 thetrip.proposedCab = theCab
                 theTrip.save()
     if theTrip.acceptedCab == theCab:
@@ -130,12 +131,26 @@ def confirm_post(request):
 def trip_post(request):
     #Request contains fromX, fromY, toX, toY.
     #Add model to database
-    locationPost = LocationPost();
+    theTrip = Trip()
+    theTrip.fromX = request.GET['fromX']
+    theTrip.fromY = request.GET['fromY']
+    theTrip.toX = request.GET['toX']
+    theTrip.toY = request.GET['toY']
+    from_add = nearest_add(theTrip.fromX,theTrip.fromY)
+    to_add = nearest_add(theTrip.toX,theTrip.toY)
+    theTrip.dist = dist_calc(from_add,to_add)
+    theTrip.tfdist = 0
+    theTrip.fare = (theTrip.dist / 1000) * 10
+    theTrip.state = 1
+    theTrip.insertTrip = datetime.datetime.now()
+    theTrip.proposedFare = 0
+    theTrip.custPhone = int(request.GET['phone'])
+    theTrip.save()
+    
     #Do something with locationPost;
     #get trid
     tripSubmitTemplate = get_template("trip_submit.html")
-    html = tripSubmitTemplate.render(Context( {'cabPh': cabPh, 'cabNo': cabNo, 'locationPost': locationPost, 'custPhone': request.POST['phone']} ))
-
+    html = tripSubmitTemplate.render(Context( {'theTrip' : theTrip} ))
     return HttpResponse(html)
 
 #TODO:
